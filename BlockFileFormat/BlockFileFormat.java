@@ -117,7 +117,14 @@ public class BlockFileFormat {
 
             for (int i = 0; i < remainingInts; i++) {
                 //! TODO Lire un entier (pointeur)
+                int pointeur = buffer.getInt();
                 //! TODO Si le pointeur vaut 0, arrêter la boucle (0 = emplacement non utilisé)
+                if (pointeur == 0) {
+                    i = remainingInts;
+                } else {
+                    tmp[i] = pointeur;
+                }
+
                 //! TODO Sinon, stocker le pointeur dans le tableau temporaire
             }
 
