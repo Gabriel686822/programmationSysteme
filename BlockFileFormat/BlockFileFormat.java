@@ -157,11 +157,14 @@ public class BlockFileFormat {
      * @throws IOException si le fichier n'existe pas, est inaccessible ou n'est pas valide
      */
     public static BlockFileFormat readFromFile(String filename) throws IOException {
-        RandomAccessFile file = null; // TODO ouvrir le fichier en lecture
-        Header header = null; // TODO lire l'en-tête du fichier
+        RandomAccessFile file = new RandomAccessFile(filename, "r"); // TODO ouvrir le fichier en lecture DONE
+        Header header = file.seek(0).read(headerData); // TODO lire l'en-tête du fichier DONE
 
         // Vérifier si le header est valide (appel à header.isValid())
         // -> si ce n'est pas le cas, lever une exception IOException avec un message explicite
+        if (!header.isValid()) {
+            throw new IOException("Le header du document est invalide")
+        }
 
         BlockFileFormat format = new BlockFileFormat();
         format.header = header;
