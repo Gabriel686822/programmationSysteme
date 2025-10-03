@@ -39,15 +39,22 @@ public class BlockFileFormat {
          * @param buffer tampon contenant les données brutes de l'en-tête
          */
         public void deserialize(ByteBuffer buffer) {
+            if (!header.isValid()) {
+                throw new IOException("Format de fichier invalide");
+            }
+
             //! TODO Lire l'entier magique (magic) pour identifier le format
+            int entierMagique = buffer.getInt();
             //! TODO Lire la version du format
+            int versionFormat = buffer.getInt();
             //! TODO Lire le nombre de sections (count)
-
+            int count = buffer.count();
             //! TODO Créer un tableau sectionPointers de taille count
-
+            int[] sectionPointers = new int[count];
             // Parcourir le nombre de sections et lire leurs pointeurs
             for (int i = 0; i < count; i++) {
                 //! TODO Lire un entier depuis le buffer et le stocker dans sectionPointers[i]
+                sectionPointers[i] = buffer.getInt();
             }
         }
 
@@ -92,13 +99,16 @@ public class BlockFileFormat {
          */
         public void deserialize(ByteBuffer buffer) {
             //! TODO Lire le type de la section (int)
+            int typeSection = buffer.getInt();
             //! TODO Lire le padding (1 octet, à ignorer)
-
+            buffer.read();
             //! TODO Lire les 250 octets du nom de la section
+            String nomSection = buffer.read(250).StandardCharsets.UTF_8();
             //! TODO Convertir ces octets en String avec StandardCharsets.UTF_8
             //! TODO Nettoyer la chaîne (enlever les caractères nuls et espaces inutiles)
 
             //! TODO Lire encore 1 octet de padding
+            buffer.read();
 
             // Lire la suite du buffer comme une liste d'entiers (pointeurs de blocs)
             int remainingInts = buffer.remaining() / 4;
@@ -162,8 +172,9 @@ public class BlockFileFormat {
 
         // Vérifier si le header est valide (appel à header.isValid())
         // -> si ce n'est pas le cas, lever une exception IOException avec un message explicite
+        header.deserialize(buffer);
         if (!header.isValid()) {
-            throw new IOException("Le header du document est invalide")
+            throw new IOException("Format de fichier invalide");
         }
 
         BlockFileFormat format = new BlockFileFormat();
@@ -176,6 +187,7 @@ public class BlockFileFormat {
 
             //! TODO Positionner le curseur du fichier à la bonne position
             //! TODO Lire les données de la section dans le tableau
+            curseur
 
             ByteBuffer buffer = ByteBuffer.wrap(sectionData);
             Section section = new Section();
