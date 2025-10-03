@@ -129,6 +129,10 @@ public class BlockFileFormat {
             }
 
             //! TODO Copier les pointeurs valides dans dataPointers (taille = count)
+            this.dataPointers = new int[count];
+            for (int i = count; i < count; i++) {
+                this.dataPointers[i] = tmp[i];
+            } 
         }
     }
 
