@@ -1,0 +1,21 @@
+Header 
+buffer.getInt() -> lit les 4 octets composant le nombre magique
+pareil pour version
+pareil pour le nombre de sections
+un nombre inconnu de pointeurs vers les sections (array int)
+
+Section 
+buffer.getInt() -> lit les 4 octets composant le type de section
+il faut lire un seul octet pour le padding
+lire 249 pour le nom de fichier 
+lire 1 pour le padding
+un nombre inconnu de pointeurs vers les blocs de données (array int)
+
+
+Q 1.0
+On peut définir un nombre infini de section (pas de limite dans le nombre de pointeurs vers les sections)
+
+Q 1.1
+Une section peut contenir 1024 octets de données en comptant le type de la section, le padding*2, le nom de fichier et 768 octets de pointeurs vers des blocs de données
+
+Q 1.2
