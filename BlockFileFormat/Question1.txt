@@ -28,7 +28,7 @@ Q 1.2
 En suppoisant que 42 = 'B' le magic number 0x424C4B46 correspondrait à 'BLKF'
 
 Q 1.3
-En sachant que BLOCK_SIZE = 1ko, on peut dire que le fichier fera au maximum (1012/4)*1024 octets
-Un fichier fera au maximum 259072 octets soit 259Ko
+En sachant que BLOCK_SIZE = 1ko, on peut dire que le fichier fera (1012/4)*1024 octets
+Un fichier fera 259072 octets soit 259Ko.
 
 
