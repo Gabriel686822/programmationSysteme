@@ -198,7 +198,6 @@ public class BlockFileFormat {
 
             //! TODO Positionner le curseur du fichier à la bonne position
             //! TODO Lire les données de la section dans le tableau
-            curseur
 
             ByteBuffer buffer = ByteBuffer.wrap(sectionData);
             Section section = new Section();
